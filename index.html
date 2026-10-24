@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06a7c0">
+<link rel="icon" href="logo-azul.png">
+<meta property="og:title" content="Únete a Planly">
+<meta property="og:description" content="Cuando no sabes qué hacer, Planly sí. Planes, restaurantes y comunidad en Cartagena.">
+<meta property="og:image" content="cartagena-rooftop.jpg">
+<title>Únete a Planly</title>
+<meta name="description" content="Planly: descubre planes, restaurantes y experiencias en Cartagena y vívelos con una comunidad real. Regístrate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: one mobile column of full-bleed bands (photo hero, light, Night Forest, light) ending in the sign-up form */
+:root {
+  --teal: #06a7c0;        /* Planly blue (brand cover) */
+  --tangerine: #4ba4bd;   /* brand "Tangerine" */
+  --viridian: #3b8396;
+  --night: #173c45;       /* Night Forest */
+  --ink: #0b2228;
+  --platinum: #f2f2f2;
+  --white: #ffffff;
+  --muted: #5b7379;
+  --line: #d8e4e7;
+  --mist: #e6f6f9;
+  --danger: #b4233c;
+  --font: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: 1.6rem;
+  --step-3: clamp(2rem, 7vw, 3rem);
+  --step-4: clamp(2.5rem, 10vw, 4.25rem);
+  --radius: 22px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  background: var(--white);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-weight: 500; line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 8px; }
+
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+.band { padding-block: clamp(64px, 12vw, 120px); }
+.eyebrow {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal);
+}
+.lede { color: var(--muted); font-weight: 300; font-size: var(--step-1); max-width: 34ch; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  color: var(--white);
+  background: var(--night) url("cartagena-rooftop.jpg") center 35% / cover no-repeat;
+  isolation: isolate;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(11,34,40,.55) 0%, rgba(11,34,40,.15) 35%, rgba(11,34,40,.55) 65%, rgba(11,34,40,.92) 100%);
+}
+.hero .wrap { padding-block: 28px 56px; display: grid; gap: clamp(140px, 30vw, 260px); }
+.hero-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.hero-top img { width: 112px; height: auto; }
+.coords { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: .85; text-align: right; }
+.hero h1 { font-size: var(--step-4); font-weight: 500; max-width: 12ch; }
+.hero h1 span { color: #7fdcea; }
+.hero p { margin-top: 18px; font-weight: 300; font-size: var(--step-1); max-width: 32ch; color: #e3f3f6; }
+.hero-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 54px; padding: 0 26px; border-radius: 999px; border: 0;
+  font: 500 1rem var(--font); text-decoration: none; cursor: pointer;
+  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+.btn:active { transform: scale(.98); }
+.btn-primary { background: var(--teal); color: var(--white); box-shadow: 0 10px 24px -10px rgba(6,167,192,.8); }
+.btn-primary:hover { background: #0597ae; }
+.btn-ghost { background: rgba(255,255,255,.12); color: var(--white); border: 1.5px solid rgba(255,255,255,.7); backdrop-filter: blur(6px); }
+.btn-ghost:hover { background: rgba(255,255,255,.22); }
+.btn-wa { background: #1fa855; color: var(--white); }
+
+/* ---------- How it works ---------- */
+.how-head { display: grid; gap: 14px; }
+.how-head h2 { font-size: var(--step-3); color: var(--night); }
+.steps {
+  margin-top: 40px;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(230px, 70%);
+  gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding-bottom: 12px; margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(20px, env(safe-area-inset-left, 0px));
+  scrollbar-width: thin;
+}
+@media (min-width: 860px) {
+  .steps { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; }
+}
+.step { scroll-snap-align: start; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.phone {
+  aspect-ratio: 9 / 18.5; max-width: 100%;
+  border-radius: 30px; padding: 7px; background: var(--ink);
+  box-shadow: 0 24px 40px -24px rgba(23,60,69,.55);
+}
+.phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 24px; }
+.step .num { font-size: 0.78rem; font-weight: 600; letter-spacing: .12em; color: var(--teal); }
+.step h3 { font-size: var(--step-1); color: var(--night); }
+.step p { color: var(--muted); font-size: var(--step--1); font-weight: 300; }
+
+/* ---------- Community (Night Forest) ---------- */
+.community { background: var(--night); color: var(--white); }
+.community .grid { display: grid; gap: 40px; }
+@media (min-width: 860px) { .community .grid { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+.community h2 { font-size: var(--step-3); }
+.community h2 span { color: #7fdcea; }
+.community .lede { color: #b9d3d8; margin-top: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.chip-static { padding: 9px 18px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.55); font-size: var(--step--1); }
+.inclusive { margin-top: 34px; display: grid; gap: 14px; }
+.inclusive div { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+.inclusive svg { width: 36px; height: 36px; }
+.inclusive b { font-weight: 500; display: block; }
+.inclusive span { color: #b9d3d8; font-size: var(--step--1); font-weight: 300; }
+.photo-stack { position: relative; min-height: 360px; }
+.photo-stack img {
+  position: absolute; width: 62%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius);
+  box-shadow: 0 30px 50px -20px rgba(0,0,0,.6); border: 6px solid var(--white);
+}
+.photo-stack img:nth-child(1) { left: 0; top: 0; transform: rotate(-4deg); }
+.photo-stack img:nth-child(2) { right: 0; bottom: 0; transform: rotate(3deg); }
+
+/* route */
+.route { margin-top: 64px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,.14); display: grid; gap: 28px; }
+@media (min-width: 860px) { .route { grid-template-columns: 1fr 1fr; align-items: center; } }
+.route h3 { font-size: var(--step-2); }
+.route p { color: #b9d3d8; font-weight: 300; margin-top: 10px; max-width: 40ch; }
+.route svg { width: 100%; max-width: 420px; height: auto; justify-self: center; }
+.route-path { stroke-dasharray: 6 10; animation: dash 2.4s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -32; } }
+
+/* ---------- Partners ---------- */
+.partners { background: linear-gradient(180deg, var(--white), var(--platinum)); }
+.partners .grid { display: grid; gap: 36px; }
+@media (min-width: 860px) { .partners .grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+.partners h2 { font-size: var(--step-3); color: var(--night); }
+.partners h2 span { color: var(--teal); }
+.benefits { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 0; }
+.benefits li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+.benefits li:last-child { border-bottom: 1px solid var(--line); }
+.benefits .ic { width: 44px; height: 44px; border-radius: 14px; background: var(--mist); display: grid; place-items: center; color: var(--teal); }
+.benefits .ic svg { width: 22px; height: 22px; }
+.benefits b { font-weight: 500; color: var(--night); display: block; }
+.benefits span { color: var(--muted); font-size: var(--step--1); font-weight: 300; }
+.partner-phone { display: flex; justify-content: center; }
+.partner-phone .phone { width: min(280px, 72%); transform: rotate(3deg); }
+
+/* ---------- Sign-up ---------- */
+.signup { background: var(--teal); color: var(--white); position: relative; overflow: hidden; }
+.signup::after {
+  content: ""; position: absolute; width: 520px; height: 520px; right: -200px; top: -200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.18), rgba(255,255,255,0) 70%); pointer-events: none;
+}
+.signup .grid { display: grid; gap: 34px; position: relative; z-index: 1; }
+@media (min-width: 860px) { .signup .grid { grid-template-columns: .9fr 1.1fr; align-items: start; } }
+.signup h2 { font-size: var(--step-3); }
+.signup .lede { color: #dff6fa; margin-top: 14px; }
+.card {
+  background: var(--white); color: var(--ink); border-radius: 28px; padding: clamp(20px, 5vw, 32px);
+  box-shadow: 0 30px 60px -30px rgba(11,34,40,.6);
+}
+.seg { display: grid; grid-template-columns: 1fr 1fr; background: var(--platinum); border-radius: 999px; padding: 5px; gap: 4px; }
+.seg button {
+  min-height: 46px; border: 0; border-radius: 999px; background: transparent; cursor: pointer;
+  font: 500 0.95rem var(--font); color: var(--muted);
+}
+.seg button[aria-selected="true"] { background: var(--white); color: var(--night); box-shadow: 0 4px 12px -6px rgba(23,60,69,.35); }
+form { display: grid; gap: 16px; margin-top: 22px; }
+.field { display: grid; gap: 6px; }
+.field label, .group-label { font-size: var(--step--1); font-weight: 500; color: var(--night); }
+.field small { color: var(--muted); font-weight: 300; }
+input[type="text"], input[type="tel"], input[type="email"], select {
+  width: 100%; min-height: 52px; padding: 0 16px; border-radius: 14px;
+  border: 1.5px solid var(--line); background: var(--white); color: var(--ink);
+  font: 400 1rem var(--font);
+}
+input:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(6,167,192,.15); }
+.field.invalid input, .field.invalid select { border-color: var(--danger); }
+.err { color: var(--danger); font-size: 0.8rem; min-height: 0; }
+.row2 { display: grid; gap: 16px; }
+@media (min-width: 560px) { .row2 { grid-template-columns: 1fr 1fr; } }
+.pick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.pick button {
+  min-height: 42px; padding: 0 16px; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--line); background: var(--white); color: var(--night); font: 400 0.9rem var(--font);
+  transition: background-color .15s, border-color .15s, color .15s;
+}
+.pick button[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: var(--white); }
+.consent { display: grid; grid-template-columns: 22px 1fr; gap: 12px; align-items: start; font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+.consent input { width: 22px; height: 22px; accent-color: var(--teal); margin: 2px 0 0; }
+.submit { width: 100%; margin-top: 4px; }
+.submit[disabled] { opacity: .6; cursor: progress; }
+.form-error { background: #fdecef; color: var(--danger); border-radius: 12px; padding: 12px 14px; font-size: 0.88rem; }
+
+.done { text-align: center; display: grid; gap: 14px; justify-items: center; padding: 18px 0 6px; }
+.done .badge { width: 72px; height: 72px; border-radius: 50%; background: var(--mist); display: grid; place-items: center; color: var(--teal); }
+.done h3 { font-size: var(--step-2); color: var(--night); }
+.done p { color: var(--muted); font-weight: 300; max-width: 30ch; }
+.demo-note { font-size: 0.78rem; color: var(--muted); background: var(--platinum); border-radius: 10px; padding: 8px 12px; }
+
+/* ---------- Footer ---------- */
+footer { background: var(--ink); color: #a9c2c8; }
+footer .wrap { padding-block: 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.85rem; }
+footer img { width: 96px; height: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .route-path { animation: none; }
+  .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <img src="logo-blanco.png" alt="Planly" width="492" height="200">
+      <div class="coords">Cartagena de Indias<br>10.39° N · 75.48° O</div>
+    </div>
+    <div>
+      <h1>Cuando no sabes qué hacer, <span>Planly sí.</span></h1>
+      <p>Descubre planes, restaurantes y experiencias en Cartagena, y vívelos con una comunidad real.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#registro" data-tab="persona">Quiero unirme</a>
+        <a class="btn btn-ghost" href="#registro" data-tab="negocio">Tengo un negocio</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="how-head">
+        <p class="eyebrow">Cómo funciona</p>
+        <h2 id="how-title">Tu día perfecto en Cartagena, en cinco pasos.</h2>
+        <p class="lede">Desde la app eliges qué hacer, dónde comer y con quién ir. Planly arma el resto.</p>
+      </div>
+      <div class="steps">
+        <article class="step">
+          <div class="phone"><img src="app-explora.jpg" alt="Pantalla de Planly con categorías y planes destacados" loading="lazy"></div>
+          <span class="num">01</span>
+          <h3>Explora</h3>
+          <p>Playa, aventura, cultura y gastronomía, organizadas por categoría.</p>
+        </article>
+        <article class="step">
+          <div class="phone"><img src="app-plan.jpg" alt="Detalle del plan Rosario Beach con precio y reserva" loading="lazy"></div>
+          <span class="num">02</span>
+          <h3>Elige tu plan</h3>
+          <p>Fotos, precio por persona y todo lo que incluye, antes de reservar.</p>
+        </article>
+        <article class="step">
+          <div class="phone"><img src="app-promos.jpg" alt="Restaurante aliado con promociones" loading="lazy"></div>
+          <span class="num">03</span>
+          <h3>Come rico</h3>
+          <p>Restaurantes aliados con promociones que redimes con un código desde la app.</p>
+        </article>
+        <article class="step">
+          <div class="phone"><img src="app-itinerario.jpg" alt="Itinerario organizado por mañana, tarde y noche" loading="lazy"></div>
+          <span class="num">04</span>
+          <h3>Arma tu día</h3>
+          <p>Organiza tus planes en mañana, tarde y noche, para uno o varios días.</p>
+        </article>
+        <article class="step">
+          <div class="phone"><img src="app-pdf.jpg" alt="Itinerario listo para compartir en PDF" loading="lazy"></div>
+          <span class="num">05</span>
+          <h3>Compártelo</h3>
+          <p>En PDF, imagen o link, listo para mandarlo por WhatsApp.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band community" aria-labelledby="com-title">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="eyebrow">Comunidad</p>
+          <h2 id="com-title">Más que una app, <span>una comunidad.</span></h2>
+          <p class="lede">Planly nació para que nadie se sienta solo en una ciudad. Con los Planes Planly salimos juntos y nos conocemos.</p>
+          <div class="chips">
+            <span class="chip-static">Noche de películas</span>
+            <span class="chip-static">Noche de juegos</span>
+            <span class="chip-static">Ping-pong</span>
+            <span class="chip-static">Pasadías</span>
+            <span class="chip-static">Atardeceres</span>
+          </div>
+          <div class="inclusive">
+            <div>
+              <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="17" stroke="#7fdcea" stroke-width="1.5"/><path d="M11 18.5l4.5 4.5L25 13" stroke="#7fdcea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p><b>Planes accesibles</b><span>Pensados para que todos puedan sumarse.</span></p>
+            </div>
+            <div>
+              <svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><circle cx="18" cy="18" r="17" stroke="#7fdcea" stroke-width="1.5"/><path d="M10 21v-4l2.5-5h11L26 17v4M10 21h16M13 24.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM23 24.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" stroke="#7fdcea" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <p><b>Te ayudamos con el transporte</b><span>Si no tienes cómo llegar, buscamos la forma de que vengas.</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="photo-stack" aria-hidden="true">
+          <img src="centro-historico.jpg" alt="" loading="lazy">
+          <img src="islas-playa.jpg" alt="" loading="lazy">
+        </div>
+      </div>
+
+      <div class="route">
+        <div>
+          <p class="eyebrow">Crecemos juntos</p>
+          <h3>Cartagena ⇄ Medellín</h3>
+          <p>Tenemos alianza con una comunidad en Medellín: cuando ellos vienen a Cartagena, los recibimos. Cuando tú vas a Medellín, te reciben a ti.</p>
+        </div>
+        <svg viewBox="0 0 420 260" role="img" aria-label="Ruta entre Cartagena y Medellín">
+          <path class="route-path" d="M300 46 C 400 120, 330 190, 130 214" stroke="#06a7c0" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <circle cx="300" cy="46" r="26" fill="#06a7c0" fill-opacity=".18"/>
+          <circle cx="300" cy="46" r="11" fill="#ffffff"/>
+          <text x="236" y="30" fill="#ffffff" font-family="Poppins, sans-serif" font-size="18" font-weight="500" text-anchor="end">Cartagena</text>
+          <circle cx="130" cy="214" r="26" fill="#06a7c0" fill-opacity=".18"/>
+          <circle cx="130" cy="214" r="11" fill="#ffffff"/>
+          <text x="166" y="250" fill="#ffffff" font-family="Poppins, sans-serif" font-size="18" font-weight="500">Medellín</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="band partners" aria-labelledby="par-title">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="eyebrow">Para negocios</p>
+          <h2 id="par-title">Súmate como <span>aliado Planly.</span></h2>
+          <p class="lede">Llega a locales y turistas que están buscando qué hacer en Cartagena hoy.</p>
+          <ul class="benefits">
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span><p><b>Visibilidad en la app</b><span>Tu negocio dentro de los planes y categorías que la gente explora.</span></p></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 01-13.2 7.9L3 21l1.1-4.6A9 9 0 1121 12z"/></svg></span><p><b>Reservas por WhatsApp</b><span>Los clientes te escriben directo, y sabes que llegaron por Planly.</span></p></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L3 13V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><p><b>Promociones por día</b><span>Crea tu "promo viernes" y se redime con un código desde la app.</span></p></li>
+            <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg></span><p><b>Tu propio panel</b><span>Gestiona logo, fotos, menú, sedes y promociones.</span></p></li>
+          </ul>
+        </div>
+        <div class="partner-phone" aria-hidden="true">
+          <div class="phone"><img src="app-home.jpg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band signup" id="registro" aria-labelledby="reg-title">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="eyebrow" style="color:#dff6fa">Registro</p>
+          <h2 id="reg-title">Únete a Planly.</h2>
+          <p class="lede">Déjanos tus datos y te escribimos con los próximos planes o para sumarte como aliado.</p>
+        </div>
+        <div class="card">
+          <div class="seg" role="tablist" aria-label="Tipo de registro">
+            <button type="button" role="tab" id="tab-persona" aria-selected="true" aria-controls="form">Quiero planes</button>
+            <button type="button" role="tab" id="tab-negocio" aria-selected="false" aria-controls="form">Tengo un negocio</button>
+          </div>
+
+          <form id="form" novalidate>
+            <div class="field only-negocio" hidden>
+              <label for="negocio">Nombre del negocio</label>
+              <input type="text" id="negocio" name="negocio" autocomplete="organization" placeholder="Ej. Café del Mar">
+              <span class="err" id="err-negocio"></span>
+            </div>
+            <div class="field only-negocio" hidden>
+              <label for="tipo_negocio">¿Qué tipo de negocio es?</label>
+              <select id="tipo_negocio" name="tipo_negocio">
+                <option value="">Selecciona una opción</option>
+                <option>Restaurante o bar</option>
+                <option>Tour o experiencia</option>
+                <option>Hotel u hospedaje</option>
+                <option>Producto sostenible</option>
+                <option>Comunidad o colectivo</option>
+                <option>Otro</option>
+              </select>
+              <span class="err" id="err-tipo_negocio"></span>
+            </div>
+            <div class="field">
+              <label for="nombre" id="label-nombre">Tu nombre</label>
+              <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Nombre y apellido">
+              <span class="err" id="err-nombre"></span>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label for="whatsapp">WhatsApp</label>
+                <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="300 123 4567">
+                <span class="err" id="err-whatsapp"></span>
+              </div>
+              <div class="field">
+                <label for="correo">Correo <small>(opcional)</small></label>
+                <input type="email" id="correo" name="correo" autocomplete="email" placeholder="tu@correo.com">
+                <span class="err" id="err-correo"></span>
+              </div>
+            </div>
+            <div class="field only-negocio" hidden>
+              <label for="instagram">Instagram <small>(opcional)</small></label>
+              <input type="text" id="instagram" name="instagram" placeholder="@tunegocio">
+            </div>
+
+            <div>
+              <span class="group-label" id="intereses-label">¿Qué planes te gustan?</span>
+              <div class="pick" id="pick-persona" role="group" aria-labelledby="intereses-label">
+                <button type="button" aria-pressed="false">Amigos</button>
+                <button type="button" aria-pressed="false">Románticos</button>
+                <button type="button" aria-pressed="false">Playa</button>
+                <button type="button" aria-pressed="false">Diversión</button>
+                <button type="button" aria-pressed="false">Acción y aventura</button>
+                <button type="button" aria-pressed="false">Comida</button>
+                <button type="button" aria-pressed="false">Planes Planly</button>
+              </div>
+              <div class="pick" id="pick-negocio" role="group" aria-labelledby="intereses-label" hidden>
+                <button type="button" aria-pressed="false">Visibilidad</button>
+                <button type="button" aria-pressed="false">Promociones</button>
+                <button type="button" aria-pressed="false">Reservas</button>
+                <button type="button" aria-pressed="false">Planes en conjunto</button>
+                <button type="button" aria-pressed="false">Patrocinar eventos</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="origen">¿Dónde nos conociste?</label>
+              <select id="origen" name="origen">
+                <option value="">Selecciona una opción</option>
+                <option>Rueda de negocios verdes Cardique</option>
+                <option>Instagram o TikTok</option>
+                <option>Un amigo me contó</option>
+                <option>En un plan de Planly</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <label class="consent" for="acepta">
+              <input type="checkbox" id="acepta" name="acepta">
+              <span>Acepto que Planly guarde mis datos para contactarme sobre planes y alianzas, según la Ley 1581 de 2012 de protección de datos.</span>
+            </label>
+            <span class="err" id="err-acepta"></span>
+
+            <div class="form-error" id="form-error" hidden></div>
+            <button class="btn btn-primary submit" type="submit" id="submit">Registrarme</button>
+          </form>
+
+          <div class="done" id="done" hidden>
+            <div class="badge"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+            <h3 id="done-title">¡Ya eres parte de Planly!</h3>
+            <p id="done-text">Te escribiremos por WhatsApp con los próximos planes.</p>
+            <a class="btn btn-wa" id="wa-link" href="#" target="_blank" rel="noopener" hidden>Escríbenos por WhatsApp</a>
+            <p class="demo-note" id="demo-note" hidden>Vista previa: el registro todavía no está conectado a la base de datos.</p>
+            <button type="button" class="btn" id="again" style="background:var(--platinum);color:var(--night)">Registrar a otra persona</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="logo-blanco.png" alt="Planly" width="492" height="200">
+    <span>Cuando no sabes qué hacer, Planly sí · Cartagena de Indias</span>
+  </div>
+</footer>
+
+<script>
+/* Planly sign-up. Fill CONFIG to connect Supabase; empty values run in preview mode. */
+const CONFIG = {
+  supabaseUrl: "https://ybhmqfzsggcwztpaxgcc.supabase.co",
+  supabaseKey: "sb_publishable_8aUit6voTnmOi0Ig5hsJmg_c3cGlFCz",
+  table: "registros",
+  whatsapp: "573006196013"
+};
+
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const form = $("#form"), done = $("#done");
+  let tipo = "persona";
+
+  function setTab(t) {
+    tipo = t;
+    $("#tab-persona").setAttribute("aria-selected", String(t === "persona"));
+    $("#tab-negocio").setAttribute("aria-selected", String(t === "negocio"));
+    document.querySelectorAll(".only-negocio").forEach((el) => { el.hidden = t !== "negocio"; });
+    $("#pick-persona").hidden = t !== "persona";
+    $("#pick-negocio").hidden = t !== "negocio";
+    $("#label-nombre").textContent = t === "negocio" ? "Tu nombre (persona de contacto)" : "Tu nombre";
+    $("#intereses-label").textContent = t === "negocio" ? "¿Qué te interesa de Planly?" : "¿Qué planes te gustan?";
+  }
+  $("#tab-persona").addEventListener("click", () => setTab("persona"));
+  $("#tab-negocio").addEventListener("click", () => setTab("negocio"));
+  document.querySelectorAll("[data-tab]").forEach((a) => a.addEventListener("click", () => setTab(a.dataset.tab)));
+
+  document.querySelectorAll(".pick button").forEach((b) =>
+    b.addEventListener("click", () => b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true"))
+  );
+
+  function fieldError(id, msg) {
+    const e = $("#err-" + id); if (e) e.textContent = msg || "";
+    const f = $("#" + id); if (f && f.closest(".field")) f.closest(".field").classList.toggle("invalid", !!msg);
+  }
+
+  function validate() {
+    let ok = true;
+    const req = (id, msg) => { const v = $("#" + id).value.trim(); if (!v) { fieldError(id, msg); ok = false; } else fieldError(id, ""); };
+    req("nombre", "Escribe tu nombre.");
+    if (tipo === "negocio") { req("negocio", "Escribe el nombre del negocio."); req("tipo_negocio", "Elige el tipo de negocio."); }
+    const tel = $("#whatsapp").value.replace(/\D/g, "");
+    if (tel.length < 10) { fieldError("whatsapp", "Escribe un número de 10 dígitos, ej. 300 123 4567."); ok = false; } else fieldError("whatsapp", "");
+    const mail = $("#correo").value.trim();
+    if (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { fieldError("correo", "Revisa el correo, parece incompleto."); ok = false; } else fieldError("correo", "");
+    if (!$("#acepta").checked) { $("#err-acepta").textContent = "Necesitamos tu autorización para guardar tus datos."; ok = false; } else $("#err-acepta").textContent = "";
+    return ok;
+  }
+
+  function payload() {
+    const picked = [...document.querySelectorAll(tipo === "persona" ? "#pick-persona button" : "#pick-negocio button")]
+      .filter((b) => b.getAttribute("aria-pressed") === "true").map((b) => b.textContent.trim());
+    let fuente = "web";
+    try { fuente = new URLSearchParams(location.search).get("src") || "web"; } catch (e) {}
+    return {
+      tipo,
+      nombre: $("#nombre").value.trim(),
+      whatsapp: $("#whatsapp").value.replace(/\D/g, ""),
+      correo: $("#correo").value.trim() || null,
+      negocio: tipo === "negocio" ? $("#negocio").value.trim() : null,
+      tipo_negocio: tipo === "negocio" ? $("#tipo_negocio").value : null,
+      instagram: tipo === "negocio" ? ($("#instagram").value.trim() || null) : null,
+      intereses: picked,
+      origen: $("#origen").value || null,
+      fuente,
+      acepta_datos: true
+    };
+  }
+
+  form.addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    $("#form-error").hidden = true;
+    if (!validate()) return;
+    const btn = $("#submit"); btn.disabled = true; btn.textContent = "Registrando…";
+    const data = payload();
+    const live = CONFIG.supabaseUrl && CONFIG.supabaseKey;
+    try {
+      if (live) {
+        const r = await fetch(CONFIG.supabaseUrl.replace(/\/$/, "") + "/rest/v1/" + CONFIG.table, {
+          method: "POST",
+          headers: Object.assign({ "Content-Type": "application/json", apikey: CONFIG.supabaseKey, Prefer: "return=minimal" },
+            CONFIG.supabaseKey.startsWith("eyJ") ? { Authorization: "Bearer " + CONFIG.supabaseKey } : {}),
+          body: JSON.stringify(data)
+        });
+        if (!r.ok) throw new Error("status " + r.status);
+      }
+      $("#done-title").textContent = tipo === "negocio" ? "¡Gracias por querer ser aliado!" : "¡Ya eres parte de Planly!";
+      $("#done-text").textContent = tipo === "negocio"
+        ? "Te contactaremos por WhatsApp para contarte cómo sumarte a Planly."
+        : "Te escribiremos por WhatsApp con los próximos planes.";
+      const wa = $("#wa-link");
+      if (CONFIG.whatsapp) {
+        const msg = tipo === "negocio" ? `Hola Planly, soy ${data.nombre} de ${data.negocio}. Me registré como aliado.` : `Hola Planly, soy ${data.nombre}. Me acabo de registrar.`;
+        wa.href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg); wa.hidden = false;
+      } else wa.hidden = true;
+      $("#demo-note").hidden = !!live;
+      form.hidden = true; document.querySelector(".seg").hidden = true; done.hidden = false;
+    } catch (e) {
+      const fe = $("#form-error");
+      fe.textContent = "No pudimos guardar tu registro. Revisa tu conexión e inténtalo de nuevo.";
+      fe.hidden = false;
+    } finally {
+      btn.disabled = false; btn.textContent = "Registrarme";
+    }
+  });
+
+  $("#again").addEventListener("click", () => {
+    form.reset();
+    document.querySelectorAll(".pick button").forEach((b) => b.setAttribute("aria-pressed", "false"));
+    done.hidden = true; form.hidden = false; document.querySelector(".seg").hidden = false;
+    $("#nombre").focus();
+  });
+
+  try { const q = new URLSearchParams(location.search); if (q.get("tipo") === "negocio") setTab("negocio"); } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
